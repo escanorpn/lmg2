@@ -14,7 +14,7 @@ ini_set('display_errors', 1);
 		$password="kilaqitu_peter";
 		$dbname="kilaqitu_lmg";
 		
-		$img_url="http://192.168.0.101/nw/larsen/s/uploads/property/";
+		// $img_url="http://192.168.0.101/nw/larsen/s/uploads/property/";
 		
 		// $img_url="https://losenviskas.com/app/s/uploads/property/";
 /*
