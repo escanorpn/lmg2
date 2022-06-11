@@ -1,33 +1,28 @@
 <template>
-<div data-v-5e2edc68="" data-v-40b8d964="" class="mb-5 col-md-6" data-v-320224c2="" v-if="post.name" style="    
-    margin-left: auto;
-    margin-right: auto;
-    /* box-shadow: 0px 20px 0px 0px rgb(0 0 0 / 7%); */
-    box-shadow:rgb(34 94 222 / 19%) -1px -11px 32px;
-    ">
+<div data-v-5e2edc68="" data-v-40b8d964="" class="mb-5 col-md-6" data-v-320224c2="" v-if="post.name">
 
 
-<mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide>
-
-<mdb-view hover cascade class="ms">
-        <a-carousel effect="slide" arrows  >
-    <div
-      slot="prevArrow"
-      class="custom-slick-arrow"
-      style="left: 10px;zIndex: 1"
-    >
-      <a-icon type="left-circle" />
-    </div>
-    <div slot="nextArrow"  class="custom-slick-arrow" style="right: 10px">
-      <a-icon type="right-circle" />
-    </div>
-  
-    <div  v-for="(item,index) in sm1" :key="index"  >
-      <img  :src="murl+item.loc" alt="Card image cap" class="ms1"/>
-				<mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
-    </div>
-    </a-carousel>
-		</mdb-view>
+     <mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide>
+      
+      <mdb-view hover cascade class="ms">
+          <a-carousel effect="slide" arrows  >
+            <div
+              slot="prevArrow"
+              class="custom-slick-arrow"
+              style="left: 10px;zIndex: 1"
+            >
+              <a-icon type="left-circle" />
+            </div>
+            <div slot="nextArrow"  class="custom-slick-arrow" style="right: 10px">
+              <a-icon type="right-circle" />
+            </div>
+          
+            <div  v-for="(item,index) in sm1" :key="index"  >
+              <img  :src="murl+item.loc" alt="Card image cap" class="ms1"/>
+                <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
+            </div>
+          </a-carousel>
+      </mdb-view>
 
 		<mdb-card-body class="text-center pb-0" cascade>
       <mdb-card-title><strong></strong></mdb-card-title>
@@ -36,13 +31,15 @@
 
 					
 		</mdb-card-body>
+
+       <div class="float-center" style="margin-left: auto;margin-right: auto;" @click="reload"><mdb-btn  color="danger" rounded>Delete</mdb-btn></div>
+
        
-      <div class="float-center" style="margin-left: auto;margin-right: auto;" >
-         <router-link to="/contact" >
-          <!-- <mdb-btn  color="primary" rounded>Contact for more info</mdb-btn> -->
-          <mdb-btn style="color:#e9ecef;background: linear-gradient(315deg,#3f0d12,#a71d31 74%);box-shadow: rgb(38 3 3) 1px 5px 5px;" color="" type="submit">Contact us</mdb-btn>
+      <!-- <div class="float-center" style="margin-left: auto;margin-right: auto;" >
+         <router-link to="/motocycles" >
+          <mdb-btn  color="primary" rounded>Contact for more info</mdb-btn>
         </router-link>
-      </div>
+      </div> -->
   
 	</mdb-card>
   
@@ -119,20 +116,7 @@ export default {
   }
 },
   methods: {
- currency(){
-  // Create our number formatter.
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'Ksh',
 
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
-
-console.log(formatter.format(2500))
-this.post.price= formatter.format(2500);
-},
  reload(){
    this.$parent.loading();
    
@@ -141,12 +125,12 @@ this.post.price= formatter.format(2500);
     const article = { 
     id:this.id,
   };
-      console.log("item_reload"+this.id);
+      console.log("item_reload:  "+article);
 var murl=this.$store.state.mUrl;
    axios({
           method: 'POST',
           // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
-          url: murl+'api.php?apicall=del_m1',
+          url: murl+'api.php?apicall=del_m2',
           data: article,
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
@@ -170,9 +154,9 @@ var murl=this.$store.state.mUrl;
   },
   mounted() {
     // this.fetchNews()
-    this.currency();
+    // this.currency();
     this.sm1=this.post.img;
-    console.log("im: "+JSON.stringify(this.post.im))
+    console.log("im: "+JSON.stringify(this.post.img))
   },
 }
 </script>

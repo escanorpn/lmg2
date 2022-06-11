@@ -9,7 +9,7 @@
       arrows maxHeight="400px" v-model="data" /> -->
         <div>
     <a-tabs default-active-key="1" @change="callback">
-      <a-tab-pane key="1" tab="Products">
+      <a-tab-pane key="2" tab="Products">
       <form novalidate style="
     margin-left: auto;margin-right: auto;z-index:0;justify-content: space-around;" class="md-layout" @submit.prevent="validateUser1">
       <md-card class="md-layout-item md-size-50 md-small-size-100">
@@ -95,7 +95,54 @@
      
     </form>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="services" force-render>
+  <a-tab-pane key="1" tab="Portfolio" force-render>
+    <form novalidate style="
+    margin-left: auto;
+    margin-right: auto;z-index:0;
+    justify-content: space-around;" class="md-layout" @submit.prevent="validatePortfolio">
+      <md-card class="md-layout-item md-size-50 md-small-size-100">
+        <md-card-header>
+          <div class="md-title">Portfolio</div>
+          </md-card-header>
+
+        <md-card-content>
+     
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item md-small-size-100">
+            
+              <mdb-input
+                type="textarea"
+                outline
+                inputClass="z-depth-1 p-3"
+                label="Description"  :rows="3"
+                :disabled="sending"
+                v-model="desc1"
+              />
+              
+             
+          </div>
+        </div>
+        <div class="md-layout md-gutter">
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass2('pImages')">
+            <UploadImages  @changed="handlePimages"/>
+              <span class="md-error" v-if="!$v.form.pImages.required">An Image is required</span>
+              </md-field>
+             
+            </div>
+        </div>
+  
+        </md-card-content>
+          <div class="text-center py-4 mt-3">
+          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add</mdb-btn>
+        </div>
+
+      </md-card>
+        <md-snackbar :md-active.sync="error1">{{ emsg1 }} </md-snackbar>
+      </form>
+      </a-tab-pane>
+
+       <a-tab-pane key="3" tab="services" force-render>
         <form novalidate style="
     margin-left: auto;
     margin-right: auto;z-index:0;
@@ -131,11 +178,26 @@
           
             </div>
           </div>
-
+                <div class="md-layout md-gutter">
+           
+            <div class="md-layout-item md-small-size-100">
+                          
+           <md-field :class="getValidationClass('sImages')">
+            <!-- <label for="email">Image</label> -->
+            
+            <UploadImages  @changed="handleSimages"/>
+            
+            <span class="md-error" v-if="!$v.form.sImages.required">An Image is required</span>
+           
+          </md-field>
+          
+            </div>
+          </div>
+  
         
         </md-card-content>
           <div class="text-center py-4 mt-3">
-          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add</mdb-btn>
+          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add1</mdb-btn>
         </div>
 
       </md-card>
@@ -183,17 +245,22 @@ const axios = require('axios');
         collapsed: true,
        heading: null,
        desc: null,
+       desc1: null,
       form: {
         firstName: null,
         lastName: null,
         gender: null,
         age: null,
         email: null,
+        sImages: null,
+        pImages: null,
         file:null
       },
       userSaved: false,
       error:false,
+      error1:false,
       emsg:null,
+      emsg1:null,
       sending: false,
       lastUser: null
     }),
@@ -221,6 +288,18 @@ const axios = require('axios');
         email: {
           // required,
           email
+        },
+        sImages: {
+          required,
+          // sImages
+        },
+        pImages: {
+          required,
+          // sImages
+        },
+        desc1: {
+          required,
+          // sImages
         }
       }
     },
@@ -243,23 +322,21 @@ const axios = require('axios');
       this.collapsed = !this.collapsed;
       // alert( this.collapsed );
     },
+    
+         handlePimages(files){
+          //  alert("foo"+files[0].name);
+                console.log(files)
+                this.pImages=files;
+            },
+         handleSimages(files){
+          //  alert("foo"+files[0].name);
+                console.log(files)
+                this.sImages=files;
+            },
          handleImages(files){
           //  alert("foo"+files[0].name);
                 console.log(files)
                 this.files=files;
-
-                /*
-                  [
-                    {
-                        "name": "Screenshot from 2021-02-23 12-36-33.png",
-                        "size": 319775,
-                        "type": "image/png",
-                        "lastModified": 1614080193596
-                        ...
-                    },
-                    ...
-                    ]
-                 */
             },
       getValidationClass (fieldName) {
         const field = this.$v.form[fieldName]
@@ -271,6 +348,15 @@ const axios = require('axios');
         }
       },
       getValidationClass1 (fieldName) {
+        const field = this.$v.form[fieldName]
+
+        if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      getValidationClass2 (fieldName) {
         const field = this.$v.form[fieldName]
 
         if (field) {
@@ -291,6 +377,12 @@ const axios = require('axios');
       clearForm1 () {
         this.heading = null
         this.desc = null
+        this.sImages = null
+      },
+      clearForm2 () {
+        // this.heading = null
+        this.desc1 = null
+        this.pImages = null
       },
 
       saveUser () {
@@ -342,7 +434,54 @@ const axios = require('axios');
           this.clearForm()
         }, 1500)
       },
-      
+      savePortfolio (){
+        this.sending = true
+        var murl=this.$store.state.mUrl;
+        var form_data = new FormData();
+
+      form_data.append('desc',this.desc1);
+      for( var i = 0; i < this.pImages.length; i++ ){
+          let file = this.pImages[i];
+          console.log(file);
+          form_data.append('files[' + i + ']', file);
+        }
+        // console.log("svp")
+       for (var pair of form_data.entries()) {
+          console.log(pair[0]+ ' - ' + pair[1]); 
+      }
+      // console.log(JSON.stringify(form_data))
+      axios({
+          method: 'POST',
+          // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
+          url: murl+'api.php?apicall=a_up2',
+          data: form_data,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+      })
+      .then((response) => {
+        console.log("response: "+response);
+        console.log("response1: "+ JSON.stringify(response.data));
+       
+        window.setTimeout(() => {
+          if(response.data.code==1){ 
+            this.emsg1 = response.data.message;
+            //  this.clearForm1();
+            this.error1 = true
+           
+          }
+        }, 1500)
+      })
+      .catch(function (response) {
+          //handle error
+          console.log("error"+response)
+      });
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+         this.clearForm2();
+          this.sending = false
+          
+        }, 1500)
+
+      },
       saveService () {
         this.sending = true
         var murl=this.$store.state.mUrl;
@@ -350,7 +489,14 @@ const axios = require('axios');
 
       form_data.append('heading',this.heading);
       form_data.append('desc',this.desc);
-
+      for( var i = 0; i < this.sImages.length; i++ ){
+          let file = this.sImages[i];
+          console.log(file);
+          form_data.append('files[' + i + ']', file);
+        }
+       for (var pair of form_data.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+}
       axios({
           method: 'POST',
           // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
@@ -377,8 +523,9 @@ const axios = require('axios');
       });
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
-         
+         this.clearForm1();
           this.sending = false
+          
         }, 1500)
 
       },
@@ -403,6 +550,22 @@ const axios = require('axios');
           // console.log(JSON.stringify(this.$v))
         }
       },
+          validatePortfolio () {
+            // this.$v.$touch()
+            // alert(this.desc1)
+     if(this.desc1==null){
+          this.error1 = true;
+          alert("There is an error")
+          this.emsg1 = "Please add a description";
+        }else if(this.pImages==null){
+          this.error1 = true;
+          alert("There is an error")
+          this.emsg1 = "Please add an Image";
+        }else{
+          this.savePortfolio();
+        }
+   
+      },
       validateForm () {
         // this.$v.$touch()
         // alert("gg")
@@ -412,6 +575,9 @@ const axios = require('axios');
         }else if(this.desc==null){
           this.error = true;
           this.emsg = "Please add a description of the service";
+        }else if(this.sImages==null){
+          this.error = true;
+          this.emsg = "Please add an Image of the service";
         }else{
           this.saveService();
         }

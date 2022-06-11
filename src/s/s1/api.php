@@ -152,7 +152,39 @@ require_once 'cors.php';
               $response['message'] = 'required parameters are not available';
             }
           break;
-  
+          case 'del_m2':  
+            if($data){
+              // if(1==1){
+              // $data=array();
+              $id = $data['id'];
+              // $pasword = $data['pass'];
+              
+              $qb="DELETE FROM portfolio WHERE pid='$id'";
+              $qb1=mysqli_query($conn,$qb);
+              $qa="SELECT * FROM admin  where pid='$id'";
+              
+            
+              sleep(3);
+              $qa1=mysqli_query($conn,$qa);
+                if($qa1){	             
+                  $response['error'] = true;   
+                  $response['message'] = "present";   
+                  $response['val'] = 2;   
+                  $response['id'] = $id;   	
+                }else{
+                  $response['error'] = false;   
+                  $response['message'] = "Deleted";
+                  $response['val'] = 22;   
+                  $response['id'] = $id;  
+                  $response['data'] = $qa1;
+                }
+             
+           
+              } else{
+                $response['error'] = true;   
+                $response['message'] = 'required parameters are not available';
+              }
+            break;
         case 'admin_l':  
           if($data){
             // if(1==1){
@@ -649,7 +681,6 @@ require_once 'cors.php';
           // $data=array();
           // $email = $data['email'];
           // $pasword = $data['pass'];
-          
           $qa="SELECT * FROM services ";
           $qa1=mysqli_query($conn,$qa);
           // $mData=array();
@@ -658,14 +689,20 @@ require_once 'cors.php';
           $x=0;
          
           while($row=@mysqli_fetch_assoc($qa1)){
-          
-            // $id=$row["sid"];
-            // $head=$row["head"];
-            // $desc=$row["description"];
-            
-            // $mOb=$row;
-            array_push($mOb, $row);
-          
+            // $mData[$x]=$row;
+            $img=$row["img"];
+            $mOb[$x]["pro"]=$row;
+            $qb="SELECT * FROM images where mid='".$img."'";
+            $qb1=mysqli_query($conn,$qb);
+            $x1=0;
+            while($row1=@mysqli_fetch_assoc($qb1)){
+              
+              // $mData[$x][$x1]=$row1;
+              $mOb[$x]["im"][$x1]=$row1;
+              $x1=$x1+1;
+            }
+            // $mData[]["img"]=$mDataI[];
+            $x=$x+1;
         }
             if(@mysqli_num_rows($qa1)>0){	             
               $response['error'] = false;   
@@ -684,12 +721,117 @@ require_once 'cors.php';
             }
          
        
+       
           } else{
             $response['error'] = true;   
             $response['message'] = 'required parameters are not available';
           }
         break;
-    
+         
+        case 'a_portfolio':  
+          if($data){
+            // if(1==1){
+            // $data=array();
+            // $email = $data['email'];
+            // $pasword = $data['pass'];
+            $qa="SELECT * FROM portfolio ";
+            $qa1=mysqli_query($conn,$qa);
+            // $mData=array();
+            // $mDataI=array();
+            $mOb=[];
+            $x=0;
+           
+            while($row=@mysqli_fetch_assoc($qa1)){
+              // $mData[$x]=$row;
+              $img=$row["img"];
+              $mOb[$x]["pro"]=$row;
+              $qb="SELECT * FROM images where mid='".$img."'";
+              $qb1=mysqli_query($conn,$qb);
+              $x1=0;
+              while($row1=@mysqli_fetch_assoc($qb1)){
+                
+                // $mData[$x][$x1]=$row1;
+                $mOb[$x]["im"][$x1]=$row1;
+                $x1=$x1+1;
+              }
+              // $mData[]["img"]=$mDataI[];
+              $x=$x+1;
+          }
+              if(@mysqli_num_rows($qa1)>0){	             
+                $response['error'] = false;   
+                $response['message'] = "ok";   
+                $response['val'] = 2;   
+                // $response['id'] = $id;   
+                // $response['name'] = $name;	
+                  
+                $response['data'] = $mOb;
+              }else{
+                $response['error'] = false;   
+                $response['message'] = 0;
+                $response['val'] = 0;   
+                // $response['id'] = $id;  
+                $response['data'] = $qa1;
+              }
+           
+         
+         
+            } else{
+              $response['error'] = true;   
+              $response['message'] = 'required parameters are not available';
+            }
+          break;
+        case 'h_services':  
+          if($data){
+            // if(1==1){
+            // $data=array();
+            // $email = $data['email'];
+            // $pasword = $data['pass'];
+            $qa="SELECT * FROM services limit 3";
+            $qa1=mysqli_query($conn,$qa);
+            // $mData=array();
+            // $mDataI=array();
+            $mOb=[];
+            $x=0;
+           
+            while($row=@mysqli_fetch_assoc($qa1)){
+              // $mData[$x]=$row;
+              $img=$row["img"];
+              $mOb[$x]["pro"]=$row;
+              $qb="SELECT * FROM images where mid='".$img."'";
+              $qb1=mysqli_query($conn,$qb);
+              $x1=0;
+              while($row1=@mysqli_fetch_assoc($qb1)){
+                
+                // $mData[$x][$x1]=$row1;
+                $mOb[$x]["im"][$x1]=$row1;
+                $x1=$x1+1;
+              }
+              // $mData[]["img"]=$mDataI[];
+              $x=$x+1;
+          }
+              if(@mysqli_num_rows($qa1)>0){	             
+                $response['error'] = false;   
+                $response['message'] = "ok";   
+                $response['val'] = 2;   
+                // $response['id'] = $id;   
+                // $response['name'] = $name;	
+                  
+                $response['data'] = $mOb;
+              }else{
+                $response['error'] = false;   
+                $response['message'] = 0;
+                $response['val'] = 0;   
+                // $response['id'] = $id;  
+                $response['data'] = $qa1;
+              }
+           
+         
+         
+            } else{
+              $response['error'] = true;   
+              $response['message'] = 'required parameters are not available';
+            }
+          break;
         case 'a_up':
   // $all=file_get_contents('php://input');
   // echo "all: ".extract($_POST);
@@ -800,9 +942,178 @@ case 'a_up1':
     
     $heading=$_POST["heading"];
     $desc=$_POST["desc"];
+    $nm=$heading;
 
 
-    $query = "INSERT INTO services (head, description) VALUES ('".$heading."','".$desc."')";
+
+    function file_already_uploaded($file_name,$c)
+   {
+    $query1 = "SELECT * FROM services WHERE img = '".$file_name."'";
+    $qb3=mysqli_query($c,$query1);
+  
+    if(@mysqli_num_rows($qb3)>0)
+    {
+     return true;
+    }
+    else
+    {
+     return false;
+    }
+   }
+  // var_dump($data);
+  
+    $mArray=array();
+    $q1 = "Select * from images   ORDER BY id DESC limit 1";
+    $mid=0;
+    $q1a=mysqli_query($conn,$q1);
+    if(@mysqli_num_rows($q1a)>0){
+			while($row=@mysqli_fetch_assoc($q1a)){
+        $mid=$row["id"];
+		}
+	}
+    $mid=$mid+1;
+
+    sleep(3);
+
+    for($count=0; $count<count($_FILES["files"]["name"]); $count++)
+    {
+     $file_name = $_FILES["files"]["name"][$count];
+     $tmp_name = $_FILES["files"]['tmp_name'][$count];
+     $file_array = explode(".", $file_name);
+     $file_extension = end($file_array);
+     $c=$conn;
+     if(file_already_uploaded($file_name,$c))
+     {
+      $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     }
+    // $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     
+   if(!is_dir('files/'.$nm)){
+     mkdir('files/'.$nm);
+   }
+     $location = 'files/'.$nm.'/'. $file_name;
+     
+      
+    
+     if(move_uploaded_file($tmp_name, $location))
+     {
+
+      array_push($mArray,$location);
+     
+
+      $query = "
+      INSERT INTO images (loc, mid) 
+      VALUES ('".$location."','".$mid."')";
+
+      $qb2=mysqli_query($conn,$query);
+      
+      $response['message'] = 'failed uploaded';
+     }else{
+      $response['message'] = 'error failed upload';
+      //  echo"error failed upload";
+     }
+    }
+ 
+  
+    $query = "INSERT INTO services (head, description,img) VALUES ('".$heading."','".$desc."','".$mid."')";
+    $qb1=mysqli_query($conn,$query);
+
+    if($qb1){
+      $response['code'] = 1;
+      $response['message'] = "Successfully added";
+    }else{
+      $response['code'] = 2;
+      $response['message'] = "Not added";
+    }
+
+    
+    // $response['message'] = $_FILES;
+  }else{  
+    $response['error'] = true;   
+    $response['message'] = 'required parameters are not available';   
+} 
+break;
+
+
+case 'a_up2': 
+
+  if(isTheseParametersAvailable(array('desc'))){
+    
+    $desc=$_POST["desc"];
+    $nm="folio";
+
+
+
+    function file_already_uploaded($file_name,$c)
+   {
+    $query1 = "SELECT * FROM portfolio WHERE img = '".$file_name."'";
+    $qb3=mysqli_query($c,$query1);
+  
+    if(@mysqli_num_rows($qb3)>0)
+    {
+     return true;
+    }
+    else
+    {
+     return false;
+    }
+   }
+  // var_dump($data);
+  
+    $mArray=array();
+    $q1 = "Select * from images   ORDER BY id DESC limit 1";
+    $mid=0;
+    $q1a=mysqli_query($conn,$q1);
+    if(@mysqli_num_rows($q1a)>0){
+			while($row=@mysqli_fetch_assoc($q1a)){
+        $mid=$row["id"];
+		}
+	}
+    $mid=$mid+1;
+
+    sleep(3);
+
+    for($count=0; $count<count($_FILES["files"]["name"]); $count++)
+    {
+     $file_name = $_FILES["files"]["name"][$count];
+     $tmp_name = $_FILES["files"]['tmp_name'][$count];
+     $file_array = explode(".", $file_name);
+     $file_extension = end($file_array);
+     $c=$conn;
+     if(file_already_uploaded($file_name,$c))
+     {
+      $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     }
+    // $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     
+   if(!is_dir('files/'.$nm)){
+     mkdir('files/'.$nm);
+   }
+     $location = 'files/'.$nm.'/'. $file_name;
+     
+      
+    
+     if(move_uploaded_file($tmp_name, $location))
+     {
+
+      array_push($mArray,$location);
+     
+
+      $query = "
+      INSERT INTO images (loc, mid) 
+      VALUES ('".$location."','".$mid."')";
+
+      $qb2=mysqli_query($conn,$query);
+      
+      $response['message'] = 'failed uploaded';
+     }else{
+      $response['message'] = 'error failed upload';
+      //  echo"error failed upload";
+     }
+    }
+ 
+  
+    $query = "INSERT INTO portfolio ( description,img) VALUES ('".$desc."','".$mid."')";
     $qb1=mysqli_query($conn,$query);
 
     if($qb1){

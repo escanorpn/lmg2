@@ -2,14 +2,14 @@
   <Layout>
     <div style="margin-top: -15px; overflow-x: ;">
 
-      <mdb-edge-header color="" style="background-color: #275d2b;position: fixed;
+      <mdb-edge-header color="" style="position: fixed;
     z-index: 0;
     top: 0;
     height: 50%;
-    width: 100%; ">
+    width: 100%; " v-bind:style="{ backgroundColor: mcolor, }">
         <div class="home-page-background"></div>
       </mdb-edge-header>
-  <mdb-card style="max-width: 1000px;width:99%;margin-top:102px">
+  <mdb-card style="max-width: 1100px;width:99%;margin-top:102px">
     <mdb-card-body>
 
       <mlist :posts="products" />
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       products: [],
+      mcolor:this.$store.state.mcolor,
     }
   },
   methods: {
@@ -70,9 +71,10 @@ axios({
           console.log(myData)
             this.products = myData.map(post => ({
             
-          id: post.sid,
-          name: post.head,
-          description: post.description,
+          id: post.pro.sid,
+          name: post.pro.head,
+          description: post.pro.description,
+          img: post.im,
           // images: post.pro.img,
           // type: post.pro.type,
           // price: post.pro.price,
@@ -104,8 +106,8 @@ axios({
 <style lang="scss" scoped>
 .card .card-body{
     padding: 0px;
-   max-width: 840px;
-   width:98%;
+   max-width: 1040px;
+   width:100%;
   margin-left:auto;
   margin-right:auto;
 }

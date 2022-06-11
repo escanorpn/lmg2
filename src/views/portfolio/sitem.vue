@@ -31,7 +31,7 @@
 
 		<mdb-card-body class="text-center pb-0" cascade>
       <mdb-card-title><strong></strong></mdb-card-title>
-      <h5>{{post.name }}</h5>
+      <!-- <h5>{{post.name }}</h5> -->
       <mdb-card-text>{{post.description}}</mdb-card-text>
 
 					
@@ -82,26 +82,7 @@ export default {
     id:0,
      murl:this.$store.state.mUrl,
      sm1:[],
-    someList:[
-          {
-            html: "https://mdbootstrap.com/img/Photos/Others/photo6.jpg",
-            style: {
-              'background': '#1bbc9b'
-            }
-          },
-          {
-            html: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg',
-            style: {
-              'background': '#4bbfc3'
-            }
-          },
-          {
-            html: '../../files',
-            style: {
-              'background': '#7baabe'
-            }
-          }
-        ],
+
         //Slider configuration [obj]
         options: {
           currentPage: 0,
@@ -119,20 +100,7 @@ export default {
   }
 },
   methods: {
- currency(){
-  // Create our number formatter.
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'Ksh',
 
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
-
-console.log(formatter.format(2500))
-this.post.price= formatter.format(2500);
-},
  reload(){
    this.$parent.loading();
    
@@ -170,9 +138,9 @@ var murl=this.$store.state.mUrl;
   },
   mounted() {
     // this.fetchNews()
-    this.currency();
+    // this.currency();
     this.sm1=this.post.img;
-    console.log("im: "+JSON.stringify(this.post.im))
+    console.log("description: "+JSON.stringify(this.post.description))
   },
 }
 </script>

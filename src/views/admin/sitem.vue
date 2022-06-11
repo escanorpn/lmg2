@@ -3,7 +3,27 @@
 
 
      <mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide>
-	
+      
+      <mdb-view hover cascade class="ms">
+          <a-carousel effect="slide" arrows  >
+            <div
+              slot="prevArrow"
+              class="custom-slick-arrow"
+              style="left: 10px;zIndex: 1"
+            >
+              <a-icon type="left-circle" />
+            </div>
+            <div slot="nextArrow"  class="custom-slick-arrow" style="right: 10px">
+              <a-icon type="right-circle" />
+            </div>
+          
+            <div  v-for="(item,index) in sm1" :key="index"  >
+              <img  :src="murl+item.loc" alt="Card image cap" class="ms1"/>
+                <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
+            </div>
+          </a-carousel>
+      </mdb-view>
+
 		<mdb-card-body class="text-center pb-0" cascade>
       <mdb-card-title><strong></strong></mdb-card-title>
       <h5>{{post.name }}</h5>
@@ -148,8 +168,8 @@ var murl=this.$store.state.mUrl;
   mounted() {
     // this.fetchNews()
     this.currency();
-    this.sm1=this.post.im;
-    console.log(JSON.stringify(this.post.im))
+    this.sm1=this.post.img;
+    console.log("im: "+JSON.stringify(this.post.img))
   },
 }
 </script>

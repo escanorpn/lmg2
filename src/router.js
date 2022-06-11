@@ -13,6 +13,7 @@ import Contact from './views/contact/contact_us.vue'
 import Services from './views/services/services.vue'
 import Motocycles1 from './views/admin/motocycles.vue'
 import Gallery from './views/Gallery/g.vue'
+import Portfolio from './views/portfolio/folio.vue'
 
 
 Vue.use(Router)
@@ -88,6 +89,12 @@ export default new Router({
       path:  '/services',
       name: 'Services',
       component: Services,
+      props: true
+    },
+    {
+      path:  '/folio',
+      name: 'Portfolio',
+      component: Portfolio,
       props: true
     }
     // {

@@ -2,9 +2,21 @@
   <Layout>
     <div style="margin-top: -15px; overflow-x: ;">
 
-  
+      <mdb-edge-header color="" style="position: fixed;
+    z-index: 0;
+    top: 0;
+    height: 50%;
+    width: 100%; " v-bind:style="{ backgroundColor: mcolor, }">
+        <div class="home-page-background"></div>
+      </mdb-edge-header>
+  <mdb-card style="max-width: 1100px;width:99%;margin-top:102px">
+    <mdb-card-body>
+
+      <mlist :posts="products" />
+     
+    </mdb-card-body>
+  </mdb-card>         
      </div>
-    <mlist :posts="products" />
    
   </Layout>
 </template>
@@ -12,26 +24,23 @@
 <script>
 import mlist from "./slist.vue"
 import axios from "axios"
-// import { mdbContainer, mdbCol, mdbRow,  mdbEdgeHeader,  mdbCardBody } from 'mdbvue';
+import {  mdbEdgeHeader,  mdbCard, mdbCardBody, } from 'mdbvue';
 // import data from "./posts.json"
 
 export default {
   components: {
-    // Layout,
-    // NewsFilter,
-    mlist,
-    // mdbContainer,
-    // mdbCol,
-    // mdbRow,
-    // mdbEdgeHeader,
     
-    // mdbCardBody
+    mlist,
+    mdbEdgeHeader,
+    mdbCard,
+    mdbCardBody
   },
   
 
   data() {
     return {
       products: [],
+      mcolor:this.$store.state.mcolor,
     }
   },
   methods: {
@@ -48,7 +57,7 @@ this.products=[];
 axios({
           method: 'POST',
           // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
-          url: murl+'api.php?apicall=a_services',
+          url: murl+'api.php?apicall=a_portfolio',
           data: mData,
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
@@ -62,16 +71,10 @@ axios({
           console.log(myData)
             this.products = myData.map(post => ({
             
-          id: post.pro.sid,
-          name: post.pro.head,
-          description: post.pro.description, 
+          id: post.pro.pid,
+          name: post.pro.pid,
+          description: post.pro.description,
           img: post.im,
-          // images: post.pro.img,
-          // type: post.pro.type,
-          // price: post.pro.price,
-          // im: post.im
-          // created_at: post.name,
-          // updated_at: post.name
          
         }))
         }
@@ -92,3 +95,16 @@ axios({
 
 }
 </script>
+
+
+<style lang="scss" scoped>
+.card .card-body{
+    padding: 0px;
+   max-width: 1040px;
+   width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+    
+</style>

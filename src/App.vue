@@ -10,9 +10,9 @@
     <mdb-navbar-toggler>
       <mdb-navbar-nav style="background: #0700007a;">  
         <mdb-nav-item  class="nav_text"  to="/" active>Home</mdb-nav-item>
-        <mdb-nav-item  class="nav_text"  to="/motocycles">Portfolio</mdb-nav-item>
-        <mdb-nav-item  class="nav_text"  to="/gallery">Gallery1</mdb-nav-item>
-        <mdb-nav-item class="nav_text"   to="/spareparts">Services</mdb-nav-item>
+        <mdb-nav-item  class="nav_text"  to="/folio">Portfolio</mdb-nav-item>
+        <mdb-nav-item  class="nav_text"  to="/gallery">Gallery</mdb-nav-item>
+        <mdb-nav-item class="nav_text"   to="/services">Services</mdb-nav-item>
         <mdb-nav-item class="nav_text"  to="/services">About</mdb-nav-item>
         <mdb-nav-item  class="nav_text"  to="/contact">Contact us</mdb-nav-item>
         <mdb-nav-item  class="nav_text"   to="/admin">Admin</mdb-nav-item>
@@ -20,7 +20,7 @@
       </mdb-navbar-nav>
       <mdb-navbar-nav right>  
        
-         <mdb-nav-item  to="/cart" style="float:right;">{{cItems}} <mdb-icon  to="/cart" fab icon="opencart" style="color:white" /></mdb-nav-item>
+         <!-- <mdb-nav-item  to="/cart" style="float:right;">{{cItems}} <mdb-icon  to="/cart" fab icon="opencart" style="color:white" /></mdb-nav-item> -->
       </mdb-navbar-nav>
     
        
@@ -44,7 +44,7 @@
     </div>
 </template>
 <script>
-  import { mdbNavbar, mdbNavbarBrand, mdbNavbarToggler, mdbNavbarNav, mdbNavItem, mdbIcon } from 'mdbvue';
+  import { mdbNavbar, mdbNavbarBrand, mdbNavbarToggler, mdbNavbarNav, mdbNavItem, } from 'mdbvue';
   
 import { isMobile } from 'mobile-device-detect';
   // alert(this.mib);
@@ -65,7 +65,7 @@ import { isMobile } from 'mobile-device-detect';
       mdbNavbarToggler,
       mdbNavbarNav,
       mdbNavItem,
-      mdbIcon
+      // mdbIcon
       
       
      

@@ -10,15 +10,14 @@
 
 		<div class="wrap" style="max-width: 1200px;">
 			<div class="card text-center" style="width: 100%; max-width: 1200px; margin-right: auto; margin-left: auto; margin-top: -142px;background: linear-gradient(180deg,rgb(136 34 30) 15%, rgb(255, 255, 255) 3%, rgb(255, 255, 255) 81%, rgb(60 13 11) 4%);box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;"><div class="card-body">
-				<h2 style="color:white;text-shadow: 1px 1px 2px black;">
+				<h2 style="color:white;text-shadow: 1px 1px 2px black;margin-top: -15px;">
 					<b>Products and Services</b>
 				</h2>
-			<div class="container"><div class="row">
+			<!-- <div class="container">
+				<div class="row">
 				<div class="col-md-4"><div class="card white lighten-1 black-text text-center" style="max-width: 700px; margin-left: auto; margin-right: auto; margin-top: 32px;"><div class="card-body" style="color: rgb(1, 5, 9);">
 				<h5>EXHIBITION STANDS AND TRADE SHOW BOOTHS
 				</h5>
-				<p style=" margin-top: 22px;">
-				</p>
 				<br>
 					<a role="button" class="btn-floating btn t btn-sm Ripple-parent waves-effect waves-light" style="padding: 8px; border-radius: 12px;background: linear-gradient(315deg,#3f0d12,#a71d31 74%);">More<div class="Ripple " style="top: 0px; left: 0px; width: 0px; height: 0px;"></div>
 					</a>
@@ -26,8 +25,9 @@
 					</div>
 				</div>
 
-	</div>
-</div>
+			</div>
+		</div> -->
+		<mlist :posts="products" />
 	</div>
 </div>
 </div>
@@ -36,26 +36,25 @@
 </article>
 </template>
 <script>
+
+import mlist from "./slist.vue"
 // import { mdbBtn,} from 'mdbvue';
 import axios from "axios";
 // import $ from 'jquery'
 export default {
-name: 'AppPage',
+name: 'sHomePage',
 components: {
-
-// mdbListGroup,
-// mdbListGroupItem,
-// mdbBtn,
-
+	mlist,
 },
 data() {
 return {
-mItems: [],
-sending: false,
-dList:false,
-cRequest:false,
-mWx:'0px',
-mWy:'0px',
+	products: [],
+	mItems: [],
+	sending: false,
+	dList:false,
+	cRequest:false,
+	mWx:'0px',
+	mWy:'0px',
 
 }
 },
@@ -74,101 +73,54 @@ computed: {
   }
 },
 methods:{
-onClick(){
-// alert("foo")
+    async fetchServices() {
+	this.products=[];
+        var murl=this.$store.state.mUrl;
+		const mData = { 
+			nm:"peter" ,
+		};
+    
+		axios({
+			method: 'POST',
+			// url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
+			url: murl+'api.php?apicall=h_services',
+			data: mData,
+			config: { headers: {'Content-Type': 'multipart/form-data' }}
+		})
+		.then((response) => {
+			const results = response.data
+			const myData = response.data.data
+			// console.log("response: "+JSON.stringify(response));
+			console.log("response1: "+ JSON.stringify(myData));
+			
+			if(results.val==2){
+			console.log(myData)
+				this.products = myData.map(post => ({
+				
+			id: post.pro.sid,
+			name: post.pro.head,
+			description: post.pro.description,
+			img: post.im,
+		
+			
+			}))
+			}
+		
+
+		}).catch(function (response) {
+			//handle error
+			console.log("error"+response)
+		});
+
+    },
 },
-mouseMove(event) {
-var movementStrength = 15;
-var height = movementStrength / window.innerHeight;
-var width = movementStrength / window.innerWidth;
-console.log(event.clientX, event.clientY);
-var pageX = event.clientX - (window.innerWidth / 2);
-var pageY = event.clientY - (window.innerHeight / 2);
-
-var newvalueX = width * pageX * -1 - 25;
-var newvalueY = height * pageY * -1 - 25;
-console.log(newvalueX)
-console.log(newvalueY)
-
-
-this.mWx=newvalueX+"px";
-this.mWy=newvalueY+"px";
-console.log(this.mWx)
-console.log(this.mWy)
-// alert(event.clientX, event.clientY);
-},
-animateBg(){
-
-},
-
 mounted() {
-this.animateBg();
+ this.fetchServices();
 },
 
-keymonitor: function(event) {
-
-console.log(event.target.value);
-if(event.target.value!= ""){
-
-this.mSearch(event.target.value);
-
-}else{
-this.mItems=[];
-this.dList=false;
-}
-},
-mSearch (s){
-
-this.sending=true;
-var murl=this.$store.state.mUrl;
-const mData = {
-search:s ,
-};
-axios({
-method: 'POST',
-// url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
-url: murl+'api.php?apicall=a_search',
-data: mData,
-config: { headers: {'Content-Type': 'multipart/form-data' }}
-})
-.then((response) => {
-const results = response.data
-const myData = response.data.data
-// console.log("response: "+JSON.stringify(response));
-console.log("response1: "+ JSON.stringify(myData));
-
-if(results.val==2){
-this.cRequest=false;
-console.log(myData)
-this.mItems = myData.map(post => ({
-name:post.name,
-type:post.type
-}))
-
-// console.log("mItems: "+ JSON.stringify(myData));
-this.dList=true;
-}else if(results.val==0){
 
 
-this.dList=false;
-this.cRequest=true;
-}
-this.sending=false;
 
-})
-.catch(function (response) {
-this.sending=false;
-//handle error
-console.log("error"+response)
-});
-
-},
-mSearchitem(s){
-console.log(s);
-this.dList=false;
-}
-
-}
 };
 </script>
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import mlist from "./slist.vue"
+import mlist from "./plist.vue"
 import axios from "axios"
 // import { mdbContainer, mdbCol, mdbRow,  mdbEdgeHeader,  mdbCardBody } from 'mdbvue';
 // import data from "./posts.json"
@@ -48,7 +48,7 @@ this.products=[];
 axios({
           method: 'POST',
           // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
-          url: murl+'api.php?apicall=a_services',
+          url: murl+'api.php?apicall=a_portfolio',
           data: mData,
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
@@ -62,8 +62,8 @@ axios({
           console.log(myData)
             this.products = myData.map(post => ({
             
-          id: post.pro.sid,
-          name: post.pro.head,
+          id: post.pro.pid,
+          name: post.pro.pid,
           description: post.pro.description, 
           img: post.im,
           // images: post.pro.img,

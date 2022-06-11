@@ -1,13 +1,12 @@
 <template>
-<div data-v-5e2edc68="" data-v-40b8d964="" class="mb-5 col-md-6" data-v-320224c2="" v-if="post.name" style="    
-    margin-left: auto;
-    margin-right: auto;
+<div data-v-5e2edc68="" data-v-40b8d964="" class="mb-4 col-md-4" data-v-320224c2="" v-if="post.name" style="    
+
     /* box-shadow: 0px 20px 0px 0px rgb(0 0 0 / 7%); */
     box-shadow:rgb(34 94 222 / 19%) -1px -11px 32px;
     ">
 
 
-<mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide>
+<mdb-card v-animateOnScroll="{animation: 'fadeInTop', delay: 30}" wide style=" width: 99%;">
 
 <mdb-view hover cascade class="ms">
         <a-carousel effect="slide" arrows  >
@@ -37,20 +36,15 @@
 					
 		</mdb-card-body>
        
-      <div class="float-center" style="margin-left: auto;margin-right: auto;" >
-         <router-link to="/contact" >
-          <!-- <mdb-btn  color="primary" rounded>Contact for more info</mdb-btn> -->
-          <mdb-btn style="color:#e9ecef;background: linear-gradient(315deg,#3f0d12,#a71d31 74%);box-shadow: rgb(38 3 3) 1px 5px 5px;" color="" type="submit">Contact us</mdb-btn>
-        </router-link>
-      </div>
-  
+
+    <br/>
 	</mdb-card>
   
         </div>
 </template>
 
 <script>
-import {   mdbCard, mdbCardBody,animateOnScroll, mdbBtn} from 'mdbvue';
+import {   mdbCard, mdbCardBody,animateOnScroll, } from 'mdbvue';
       
 // import { slider, slideritem } from 'vue-concise-slider'
  const axios = require('axios');
@@ -58,7 +52,6 @@ export default {
    name: 'HomePage',
   components: {
 
-  mdbBtn,
   mdbCard,
   mdbCardBody,
 
