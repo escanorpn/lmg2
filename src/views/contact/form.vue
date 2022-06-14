@@ -26,12 +26,12 @@
         </a> 
     </mdb-col>
       <mdb-col col="sm"> 
-        <a href='https://wa.me/0707276477' target='_blank'>
+        <a href='https://wa.me/0702220000' target='_blank'>
         <mdb-card style="width:98%;max-width:220px;margin-bottom:3%;padding-top:42px;padding-bottom:42px;margin-top; " >
           <mdb-card-body style="margin-left:auto;margin-right:auto;">
              
               <p>  <mdb-icon fab icon="whatsapp" /> &nbsp;whatsapp number</p>
-              <p>0707276477</p>
+              <p>0702220000</p>
                <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" >Call</mdb-btn>
           </mdb-card-body>
           </mdb-card>

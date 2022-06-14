@@ -39,13 +39,14 @@ require_once 'cors.php';
               }
               if(isset($data['mCarray'])&& !empty($data['mCarray'])){
                 
-              $url="https://15minuteslogistics.co/#/md/".$eid."/cart";
+              $url="https://lmglobalexhibitions.com/#/md/".$eid."/cart";
               }else{
 
                 $url="";
               }
               // $url="http://localhost:8080/#/md/".$eid."/cart";
-              $to = "info@15minuteslogistics.co";
+              // $to = "info@15minuteslogistics.co";
+              $to = "vector.pn@gmail.com";
               // $to = "ventor.pn@gmail.com";
               $subject = "Query";
               
