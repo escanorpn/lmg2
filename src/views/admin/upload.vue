@@ -9,7 +9,7 @@
       arrows maxHeight="400px" v-model="data" /> -->
         <div>
     <a-tabs default-active-key="1" @change="callback">
-      <a-tab-pane key="2" tab="Products">
+      <!-- <a-tab-pane key="2" tab="Products">
       <form novalidate style="
     margin-left: auto;margin-right: auto;z-index:0;justify-content: space-around;" class="md-layout" @submit.prevent="validateUser1">
       <md-card class="md-layout-item md-size-50 md-small-size-100">
@@ -22,15 +22,6 @@
               <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('gender')">
                 <label for="gender">Category</label>
-                  <!-- <a-select default-value="Motocycle">
-                    <a-select-option value="Motocycle">
-                      Motocycle
-                    </a-select-option>
-                    <a-select-option value="Spareparts">
-                      Spareparts
-                    </a-select-option>
-                  </a-select> -->
-        
                 <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
                   <md-option></md-option>
                   <md-option value="Motocycle">Motocycle</md-option>
@@ -43,18 +34,14 @@
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('firstName')">
                 <label for="first-name">Name</label>
-                <!-- <a-input placeholder="Name" name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" /> -->
                 <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
                 <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid name</span>
               </md-field>
             </div>
 
-       
           </div>
-
           <div class="md-layout md-gutter">
-          
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('lastName')">
                 <label for="last-name">Description</label>
@@ -82,9 +69,6 @@
             <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
           </md-field>
         </md-card-content>
-
-       
-
           <div class="text-center py-4 mt-3">
           <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add</mdb-btn>
         </div>
@@ -94,7 +78,7 @@
       <md-snackbar :md-active.sync="userSaved">The Product {{ lastUser }} was saved with success!</md-snackbar>
      
     </form>
-      </a-tab-pane>
+      </a-tab-pane> -->
   <a-tab-pane key="1" tab="Portfolio" force-render>
     <form novalidate style="
     margin-left: auto;
@@ -197,7 +181,7 @@
         
         </md-card-content>
           <div class="text-center py-4 mt-3">
-          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add1</mdb-btn>
+          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add</mdb-btn>
         </div>
 
       </md-card>
