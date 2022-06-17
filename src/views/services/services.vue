@@ -9,7 +9,7 @@
     width: 100%; " v-bind:style="{ backgroundColor: mcolor, }">
         <div class="home-page-background"></div>
       </mdb-edge-header>
-  <mdb-card style="max-width: 1100px;width:99%;margin-top:102px">
+  <mdb-card style="max-width: 1500px;width:99%;margin-top:102px">
     <mdb-card-body>
 
       <mlist :posts="products" />
@@ -106,8 +106,8 @@ axios({
 <style lang="scss" scoped>
 .card .card-body{
     padding: 0px;
-   max-width: 1040px;
-   width:100%;
+   max-width: 1700px;
+   width:99%;
   margin-left:auto;
   margin-right:auto;
 }

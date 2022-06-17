@@ -224,7 +224,7 @@
         
         </md-card-content>
           <div class="text-center py-4 mt-3">
-          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add1</mdb-btn>
+          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add</mdb-btn>
         </div>
 
       </md-card>

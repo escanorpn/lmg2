@@ -1,14 +1,15 @@
 <template>
-  <div class="mTop" v-bind:style="{ backgroundColor: mcolor }">
+  <div class="mTop" v-bind:style="{ backgroundColor: mcolor }" style="height:100%;">
 
-  <a-layout id="components-layout-demo-responsive">
-    <a-affix :offset-top="top" class="mTop">
+  <a-layout id="components-layout-demo-responsive" >
+    <a-affix :offset-top="top" class="mTop" >
     <a-layout-sider 
     
       breakpoint="lg"
       collapsed-width="0"
       @collapse="onCollapse"
       @breakpoint="onBreakpoint"
+
     >
       <div class="logo" />
       <a-menu theme="dark" mode="inline" :default-selected-keys="['3']">
@@ -101,7 +102,7 @@ const axios = require('axios');
     name: 'Products',
     mixins: [validationMixin],
     data: () => ({
-      
+      mcolor1:"#fff",
       top: 70,
         collapsed: true,
        mProduct:1,
@@ -284,6 +285,8 @@ const axios = require('axios');
         /* margin-top: 73px; */
         // background: linear-gradient(337deg,$c1 15%,  $c4 4%);
         background: linear-gradient($c2,$c3);
+        background-attachment: fixed;
+        
         // margin-top: -23%;
         // padding-top: 30%;
     }

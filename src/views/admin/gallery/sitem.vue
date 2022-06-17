@@ -32,7 +32,7 @@
 					
 		</mdb-card-body>
 
-       <div class="float-center" style="margin-left: auto;margin-right: auto;" @click="reload(item.gid)"><mdb-btn  color="danger" rounded>Delete {{item.gid}}</mdb-btn></div>
+       <div class="float-center" style="margin-left: auto;margin-right: auto;" @click="reload(item.gid)"><mdb-btn  color="danger" rounded>Delete </mdb-btn></div>
 
        
       <!-- <div class="float-center" style="margin-left: auto;margin-right: auto;" >
