@@ -1,32 +1,41 @@
 <template>
   <div >
-    <stack :column-min-width="320" :gutter-width="8" :gutter-height="8" :monitor-images-loaded="true">
-      <stack-item v-for="(item, i) in mp" :key="i" style=" box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;transition: transform 300ms" >
-      
-          <img   :src="url+item.url" alt="Card image cap" class="ms1"/>
-         
-        <!-- {{ item.source }} -->
-      </stack-item>
-    </stack>
+    <!-- <stack :column-min-width="320" :gutter-width="8" :gutter-height="8">
+      <stack-item v-for="(item, i) in mp" :key="i" style=" box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;" > -->
 
+       <!-- <div  v-for="(item,i) in mp" :key="i"  >
+ <div  class="mb-5 col-md-4" >
+     <mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide  >
+      
+      <mdb-view hover cascade class="ms" >
+          <img   :src="url+item.url" alt="Card image cap" class="ms1" />
+      
+      </mdb-view>
+     </mdb-card>
+       </div>
+       </div> -->
+      <!-- </stack-item>
+    </stack> -->
+ <mlist :posts="products" />
   </div>
 </template>
+
 <script>
 // import { PhotoCollageWrapper } from "vue-photo-collage";
- import { Stack, StackItem } from 'vue-stack-grid';
+//  import { Stack, StackItem } from 'vue-stack-grid';
 // import Gallery from "vuejs-image-gallery";
 import { photos } from "./photos";
 import axios from "axios"
-// import mlist from "./slist.vue"
+import mlist from "./slist.vue"
 
 
 export default {
   components: {
     // PhotoCollageWrapper,
-    Stack,
-    StackItem,
+    // Stack,
+    // StackItem
 	// Gallery
-  // mlist
+  mlist
   },
   methods: {
     itemClickHandler(data, column) {
