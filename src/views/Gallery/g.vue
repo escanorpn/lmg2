@@ -1,152 +1,106 @@
 <template>
   <div >
-    <stack :column-min-width="320" :gutter-width="8" :gutter-height="8">
-      <stack-item v-for="(item, i) in mp" :key="i" style=" box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;" >
-      
-          <img   :src="item.src" alt="Card image cap" class="ms1"/>
-         
-        <!-- {{ item.source }} -->
-      </stack-item>
-    </stack>
+    <!-- <stack :column-min-width="320" :gutter-width="8" :gutter-height="8">
+      <stack-item v-for="(item, i) in mp" :key="i" style=" box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;" > -->
 
+       <!-- <div  v-for="(item,i) in mp" :key="i"  >
+ <div  class="mb-5 col-md-4" >
+     <mdb-card v-animateOnScroll="{animation: 'fadeInLeft', delay: 30}" wide  >
+      
+      <mdb-view hover cascade class="ms" >
+          <img   :src="url+item.url" alt="Card image cap" class="ms1" />
+      
+      </mdb-view>
+     </mdb-card>
+       </div>
+       </div> -->
+      <!-- </stack-item>
+    </stack> -->
+ <mlist :posts="products" />
   </div>
 </template>
 
 <script>
 // import { PhotoCollageWrapper } from "vue-photo-collage";
- import { Stack, StackItem } from 'vue-stack-grid';
+//  import { Stack, StackItem } from 'vue-stack-grid';
 // import Gallery from "vuejs-image-gallery";
 import { photos } from "./photos";
+import axios from "axios"
+import mlist from "./slist.vue"
 
 
 export default {
   components: {
     // PhotoCollageWrapper,
-    Stack,
-    StackItem
+    // Stack,
+    // StackItem
 	// Gallery
+  mlist
   },
   methods: {
     itemClickHandler(data, column) {
       const item = Object.assign({}, data);
       alert(`itemId=${item.id}, column=${column}`);
     },
+    
+    async fetchItems() {
+      // alert("dd")
+        this.products=[];
+        var murl=this.$store.state.mUrl;
+       const mData = { 
+            nm:"peter" ,
+          };
+    
+          axios({
+              method: 'POST',
+              // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
+              url: murl+'api.php?apicall=v_gallery',
+              data: mData,
+              config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then((response) => {
+            const results = response.data
+            const myData = response.data.data
+            // console.log("response: "+JSON.stringify(response));
+            console.log("responseG: "+ JSON.stringify(myData));
+            
+          
+            if(results.val==2){
+              console.log(myData)
+                this.mp = myData
+                this.products = myData
+            }
+          
+
+          })
+          .catch(function (response) {
+              //handle error
+              console.log("error"+response)
+          });             
+
+  }
   },
   data() {
     return {
+      products: photos,
       mp:photos,
-      items: [
-          {
-            source:
-              "https://images.unsplash.com/photo-1517088455889-bfa75135412c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5548929376f93d8b1b7a21097df03bd&auto=format&fit=crop&w=749&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526656892012-7b336603ed46?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=31c8e58b58c25dfcc18452ed29b52951&auto=format&fit=crop&w=334&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1521024221340-efe7d7fa239b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9ad8a99d809d3fa3a9e8dff3ecc81878&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1523038793606-2fd28f837a85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=919b76f4229e41416653aeb10e84e94a&auto=format&fit=crop&w=334&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1516832970803-325be7a92aa5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=93d7ac9abad6167aecb49ebd67fd5b6d&auto=format&fit=crop&w=751&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-        ],
-            images: [{
-                    id: 1,
-                    imgSrc: require("../../assets/img/1.jpg")
-                },
-                {
-                    id: 2,
-                    imgSrc: require("../../assets/img/1.jpg")
-                },
+   url:this.$store.state.mUrl,
            
-            ],
       collage: {
         gapSize: "1em",
         borderRadius: "1em",
         width: "auto",
         height: ["calc(50vh - 2em)", "calc(50vh - 1em)"],
         layout: [2, 3],
-        photos: [
-          {
-            source:
-              "https://images.unsplash.com/photo-1517088455889-bfa75135412c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5548929376f93d8b1b7a21097df03bd&auto=format&fit=crop&w=749&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526656892012-7b336603ed46?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=31c8e58b58c25dfcc18452ed29b52951&auto=format&fit=crop&w=334&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1521024221340-efe7d7fa239b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9ad8a99d809d3fa3a9e8dff3ecc81878&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1523038793606-2fd28f837a85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=919b76f4229e41416653aeb10e84e94a&auto=format&fit=crop&w=334&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1516832970803-325be7a92aa5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=93d7ac9abad6167aecb49ebd67fd5b6d&auto=format&fit=crop&w=751&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1526938972776-11558ad4de30?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=973795a277e861265b0fabbf4a96afe2&auto=format&fit=crop&w=750&q=80",
-          },
-          {
-            source:
-              "https://images.unsplash.com/photo-1464550838636-1a3496df938b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f22dbf6c13ea7c21e803aa721437b691&auto=format&fit=crop&w=888&q=80",
-          },
-        ],
+       
         showNumOfRemainingPhotos: true,
       },
     };
   },
+  mounted() {
+    this.fetchItems()
+  },
+  
 };
 </script>
 

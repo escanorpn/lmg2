@@ -26,6 +26,7 @@
     "vue": "^2.6.11",
     "vue-axios": "^3.2.5",
     "vue-cookies": "^1.7.4",
+    "vue-lazyload": "^3.0.0-rc.2",
     "vue-material": "^1.0.0-beta-15",
     "vue-nacl-crypter": "^1.0.9",
     "vue-photo-collage": "^1.0.5",

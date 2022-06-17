@@ -18,6 +18,8 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueLazyload from 'vue-lazyload'
+
 
 import VueCookies from 'vue-cookies'
 import * as cr from 'vue-nacl-crypter' 
@@ -31,6 +33,7 @@ Vue.use(VueAxios, axios)
 Vue.use(Antd);
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
+Vue.use(VueLazyload)
 // Vue.use(isMobile)
 
 new Vue({

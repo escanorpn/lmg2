@@ -153,6 +153,39 @@ require_once 'cors.php';
               $response['message'] = 'required parameters are not available';
             }
           break;
+          case 'del_m3':  
+            if($data){
+              // if(1==1){
+              // $data=array();
+              $id = $data['id'];
+              // $pasword = $data['pass'];
+              
+              $qb="DELETE FROM gallery WHERE gid='$id'";
+              $qb1=mysqli_query($conn,$qb);
+              // $qa="SELECT * FROM admin  where sid='$id'";
+              
+            
+              sleep(3);
+              $qa1=mysqli_query($conn,$qb);
+                if(!$qa1){	             
+                  $response['error'] = true;   
+                  $response['message'] = "Error when deleting";   
+                  $response['val'] = 2;   
+                  $response['id'] = $qa1;   	
+                }else{
+                  $response['error'] = false;   
+                  $response['message'] = "Deleted";
+                  $response['val'] = 22;   
+                  $response['id'] = $id;  
+                  $response['data'] = $id;
+                }
+             
+           
+              } else{
+                $response['error'] = true;   
+                $response['message'] = 'required parameters are not available';
+              }
+            break;
           case 'del_m2':  
             if($data){
               // if(1==1){
@@ -729,6 +762,84 @@ require_once 'cors.php';
           }
         break;
          
+      case 'a_gallery':  
+        if($data){
+   
+          $qa="SELECT * FROM gallery ";
+          $qa1=mysqli_query($conn,$qa);
+      
+          $mOb=[];
+          $x=0;
+         
+          while($row=@mysqli_fetch_assoc($qa1)){
+
+            $mOb[$x]["im"][$x]=$row;
+
+            $x=$x+1;
+        }
+            if(@mysqli_num_rows($qa1)>0){	             
+              $response['error'] = false;   
+              $response['message'] = "ok";   
+              $response['val'] = 2;   
+              // $response['id'] = $id;   
+              // $response['name'] = $name;	
+                
+              $response['data'] = $mOb;
+            }else{
+              $response['error'] = false;   
+              $response['message'] = 0;
+              $response['val'] = 0;   
+              // $response['id'] = $id;  
+              $response['data'] = $qa1;
+            }
+         
+       
+       
+          } else{
+            $response['error'] = true;   
+            $response['message'] = 'required parameters are not available';
+          }
+        break;
+            
+      case 'v_gallery':  
+        if($data){
+   
+          $qa="SELECT * FROM gallery ";
+          $qa1=mysqli_query($conn,$qa);
+      
+          $mOb=[];
+          $x=0;
+         
+          while($row=@mysqli_fetch_assoc($qa1)){
+
+            $mOb[$x]=$row;
+
+            $x=$x+1;
+        }
+            if(@mysqli_num_rows($qa1)>0){	             
+              $response['error'] = false;   
+              $response['message'] = "ok";   
+              $response['val'] = 2;   
+              // $response['id'] = $id;   
+              // $response['name'] = $name;	
+                
+              $response['data'] = $mOb;
+            }else{
+              $response['error'] = false;   
+              $response['message'] = 0;
+              $response['val'] = 0;   
+              // $response['id'] = $id;  
+              $response['data'] = $qa1;
+            }
+         
+       
+       
+          } else{
+            $response['error'] = true;   
+            $response['message'] = 'required parameters are not available';
+          }
+        break;
+         
         case 'a_portfolio':  
           if($data){
             // if(1==1){
@@ -1132,6 +1243,104 @@ case 'a_up2':
     $response['message'] = 'required parameters are not available';   
 } 
 break;
+
+
+case 'a_up3': 
+
+  if(isTheseParametersAvailable(array('heading',))){
+    
+    $heading=$_POST["heading"];
+    $nm=$heading;
+    $mck=2;
+
+
+    function file_already_uploaded($file_name,$c)
+   {
+    $query1 = "SELECT * FROM gallery WHERE url = '".$file_name."'";
+    $qb3=mysqli_query($c,$query1);
+  
+    if(@mysqli_num_rows($qb3)>0)
+    {
+     return true;
+    }
+    else
+    {
+     return false;
+    }
+   }
+  // var_dump($data);
+  
+  //   $mArray=array();
+  //   $q1 = "Select * from images   ORDER BY id DESC limit 1";
+  //   $mid=0;
+  //   $q1a=mysqli_query($conn,$q1);
+  //   if(@mysqli_num_rows($q1a)>0){
+	// 		while($row=@mysqli_fetch_assoc($q1a)){
+  //       $mid=$row["id"];
+	// 	}
+	// }
+  //   $mid=$mid+1;
+
+    sleep(3);
+
+    for($count=0; $count<count($_FILES["files"]["name"]); $count++)
+    {
+     $file_name = $_FILES["files"]["name"][$count];
+     $tmp_name = $_FILES["files"]['tmp_name'][$count];
+     $file_array = explode(".", $file_name);
+     $file_extension = end($file_array);
+     $c=$conn;
+     if(file_already_uploaded($file_name,$c))
+     {
+      $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     }
+    // $file_name = $file_array[0] . '-'. rand() . '.' . $file_extension;
+     
+   if(!is_dir('files/'.$nm)){
+     mkdir('files/'.$nm);
+   }
+     $location = 'files/'.$nm.'/'. $file_name;
+     
+      
+    
+     if(move_uploaded_file($tmp_name, $location))
+     {
+
+      array_push($mArray,$location);
+     
+
+      $query = "
+      INSERT INTO gallery (url) 
+      VALUES ('".$location."')";
+
+      $qb2=mysqli_query($conn,$query);
+      
+      $response['message'] = 'failed uploaded';
+     }else{
+      $mck=3;
+      $response['message'] = 'error failed upload';
+      //  echo"error failed upload";
+     }
+    }
+ 
+
+    if($mck==2){
+      $response['code'] = 1;
+      $response['message'] = "Successfully added";
+    }else{
+      $response['code'] = 2;
+      $response['message'] = "Not added";
+    }
+
+    
+    // $response['message'] = $_FILES;
+  }else{  
+    $response['error'] = true;   
+    $response['message'] = 'required parameters are not available';   
+} 
+break;
+
+
 
 
 

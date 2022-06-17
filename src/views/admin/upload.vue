@@ -79,7 +79,7 @@
      
     </form>
       </a-tab-pane> -->
-  <a-tab-pane key="1" tab="Portfolio" force-render>
+  <a-tab-pane key="3" tab="Portfolio" force-render>
     <form novalidate style="
     margin-left: auto;
     margin-right: auto;z-index:0;
@@ -126,7 +126,7 @@
       </form>
       </a-tab-pane>
 
-       <a-tab-pane key="3" tab="services" force-render>
+       <a-tab-pane key="2" tab="services" force-render>
         <form novalidate style="
     margin-left: auto;
     margin-right: auto;z-index:0;
@@ -190,6 +190,49 @@
      
     </form>
       </a-tab-pane>
+
+      
+       <a-tab-pane key="1" tab="Gallery" force-render>
+        <form novalidate style="
+    margin-left: auto;
+    margin-right: auto;z-index:0;
+    justify-content: space-around;" class="md-layout" @submit.prevent="validateGallery">
+      <md-card class="md-layout-item md-size-50 md-small-size-100">
+        <md-card-header>
+          <div class="md-title">Gallery</div>
+        </md-card-header>
+
+        <md-card-content>
+      
+       
+                <div class="md-layout md-gutter">
+           
+            <div class="md-layout-item md-small-size-100">
+                          
+           <md-field :class="getValidationClass('gImages')">
+            <!-- <label for="email">Image</label> -->
+            
+            <UploadImages  @changed="handleGimages"/>
+            
+            <span class="md-error" v-if="!$v.form.gImages.required">An Image is required</span>
+           
+          </md-field>
+          
+            </div>
+          </div>
+  
+        
+        </md-card-content>
+          <div class="text-center py-4 mt-3">
+          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Add1</mdb-btn>
+        </div>
+
+      </md-card>
+
+      <md-snackbar :md-active.sync="error3">{{ emsg3 }} </md-snackbar>
+     
+    </form>
+      </a-tab-pane>
     </a-tabs>
   </div>
     
@@ -237,14 +280,17 @@ const axios = require('axios');
         age: null,
         email: null,
         sImages: null,
+        gImages: null,
         pImages: null,
         file:null
       },
       userSaved: false,
       error:false,
       error1:false,
+      error3:false,
       emsg:null,
       emsg1:null,
+      emsg3:null,
       sending: false,
       lastUser: null
     }),
@@ -276,6 +322,9 @@ const axios = require('axios');
         sImages: {
           required,
           // sImages
+        },
+        gImages: {
+          required,
         },
         pImages: {
           required,
@@ -311,6 +360,12 @@ const axios = require('axios');
           //  alert("foo"+files[0].name);
                 console.log(files)
                 this.pImages=files;
+            },
+            
+         handleGimages(files){
+          //  alert("foo"+files[0].name);
+                console.log(files)
+                this.gImages=files;
             },
          handleSimages(files){
           //  alert("foo"+files[0].name);
@@ -357,6 +412,9 @@ const axios = require('axios');
         this.form.gender = null
         this.form.email = null
        this.files = null
+      },
+      clearForm3 () {
+        this.gImages = null
       },
       clearForm1 () {
         this.heading = null
@@ -513,6 +571,53 @@ const axios = require('axios');
         }, 1500)
 
       },
+saveGallery(){
+        this.sending = true
+        var murl=this.$store.state.mUrl;
+        var form_data = new FormData();
+
+      form_data.append('heading',"Gallery");
+  
+      for( var i = 0; i < this.gImages.length; i++ ){
+          let file = this.gImages[i];
+          console.log(file);
+          form_data.append('files[' + i + ']', file);
+        }
+       for (var pair of form_data.entries()) {
+    console.log(pair[0]+ ' - ' + pair[1]); 
+}
+      axios({
+          method: 'POST',
+          // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
+          url: murl+'api.php?apicall=a_up3',
+          data: form_data,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+      })
+      .then((response) => {
+        console.log("response: "+response);
+        console.log("response3: "+ JSON.stringify(response.data));
+       
+   window.setTimeout(() => {
+          if(response.data.code==1){ 
+            this.emsg = response.data.message;
+            //  this.clearForm1();
+            this.error = true
+           
+          }
+        }, 1500)
+      })
+      .catch(function (response) {
+          //handle error
+          console.log("error"+response)
+      });
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+         this.clearForm1();
+          this.sending = false
+          
+        }, 1500)
+
+      },
 
       validateUser1 () {
        
@@ -569,6 +674,19 @@ const axios = require('axios');
         // if (!this.$v.$invalid) {
         //   this.saveService()
         // }
+      },
+
+      validateGallery () {
+      
+    if(this.gImages==null){
+        // alert(this.sImages)
+          this.error3 = true;
+          this.emsg3 = "Please add an Image ";
+        }else{
+          //  alert("Has Image")
+          this.saveGallery();
+        }
+       
       }
     }
   }
