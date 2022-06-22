@@ -10,7 +10,7 @@
 
 		<div class="wrap" style="max-width: 1200px;">
 			<div class="card text-center" style="width: 100%; max-width: 1200px; margin-right: auto; margin-left: auto; margin-top: -142px;background: linear-gradient(180deg,rgb(136 34 30) 15%, rgb(255, 255, 255) 3%, rgb(255, 255, 255) 81%, rgb(60 13 11) 4%);box-shadow:rgb(40 18 10 / 59%) 0px 32px 32px;"><div class="card-body">
-				<h2 style="color:white;text-shadow: 1px 1px 2px black;margin-top: -15px;">
+				<h2 style="color:white;text-shadow: 1px 1px 2px black;margin-top: -15px;text-shadow: 4px 2px 2px #2c0406;">
 					<b>Products and Services</b>
 				</h2>
 			<!-- <div class="container">

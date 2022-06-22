@@ -13,7 +13,7 @@
         <mdb-nav-item  class="nav_text"  to="/folio">Portfolio</mdb-nav-item>
         <mdb-nav-item  class="nav_text"  to="/gallery">Gallery</mdb-nav-item>
         <mdb-nav-item class="nav_text"   to="/services">Services</mdb-nav-item>
-        <mdb-nav-item class="nav_text"  to="/services">About</mdb-nav-item>
+        <mdb-nav-item class="nav_text"  to="/about">About</mdb-nav-item>
         <mdb-nav-item  class="nav_text"  to="/contact">Contact us</mdb-nav-item>
         <mdb-nav-item  class="nav_text"   to="/admin">Admin</mdb-nav-item>
         

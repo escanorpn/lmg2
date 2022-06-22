@@ -11,6 +11,7 @@ import Spareparts from './views/products/spareparts.vue'
 import Cart from './views/cart/cart.vue'
 import Contact from './views/contact/contact_us.vue'
 import Services from './views/services/services.vue'
+import About from './views/about/about.vue'
 import Motocycles1 from './views/admin/motocycles.vue'
 import Gallery from './views/Gallery/g.vue'
 import Portfolio from './views/portfolio/folio.vue'
@@ -89,6 +90,12 @@ export default new Router({
       path:  '/services',
       name: 'Services',
       component: Services,
+      props: true
+    },
+    {
+      path:  '/about',
+      name: 'About',
+      component: About,
       props: true
     },
     {

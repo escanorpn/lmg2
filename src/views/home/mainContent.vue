@@ -117,16 +117,16 @@
   <div class="panel-content" style="    background: linear-gradient(124deg, white 9%, white 65%, #d9d0d0 1%) center center / cover fixed;;background-color:#bb975d;">
     <div class="wrap" style="">		
       <div class="">
-        <div style="background: linear-gradient(124deg, white 9%, white 65%, #d9d0d0  1%) center center / cover fixed;">
-          <div text="black" class="text-center" style="margin-left: auto; margin-right: auto; box-shadow: rgb(40 18 10 / 59%) 0px 32px 32px;">
-            <h2 class="entry-title" style="padding-top:22px">Who we are</h2>
+        <div style="background: linear-gradient(124deg, white 9%, white 65%, #d9d0d0  1%) center center / cover fixed;margin-bottom: 33px;">
+          <div text="black" class="text-center" style="margin-left: auto; margin-right: auto;     box-shadow: #225ede30 0px -20px 32px;padding-bottom: 33px;">
+            <h2 style="padding-top:22px;font-weight: 600;">Who we are</h2>
             <br>
-            <p style="padding-left:22px;padding-right:22px">Le Meilleur Global Exhibitions is one of the leading companies in the organization of trade promotional activities and Event Management Services, with over 10 years experience in the industry.
-            </p>
+            <div style="padding-left:22px;padding-right:22px;margin-bottom:22px">Le Meilleur Global Exhibitions is one of the leading companies in the organization of trade promotional activities and Event Management Services, with over 10 years experience in the industry.
+            </div>
 
             <div class="card white lighten-1 black-text" style="box-shadow:rgb(34 94 222 / 19%) -1px -11px 32px;width: 90%; max-width: 700px;margin-left:auto; margin-right: auto;    border-radius: 0.25rem;">
               <div class="card-body" style="color: rgba(1, 5, 9, 0.63);">
-                <p style="margin-top: 52px;color: #010509a1;">Le Meilleur organizes National and International Conferences, Exhibitions, Trade Fairs, Seminars, Summits, Workshops, Branding, Business Meetings,	Cultural Programs and other business promotion related activities.	We are associated with leading organizations, Corporates, Chambers of Commerce,Associations and Agencies of Government of India and State Governments such as Korea, Qatar as well as partners of various organizations from around the world.You want a successful event! You want to work with Le Meilleur Global Exhibitions, acompany that lets your brand speak on your behalf. </p>
+                <div style="margin-top: 52px;color: #010509a1;">Le Meilleur organizes National and International Conferences, Exhibitions, Trade Fairs, Seminars, Summits, Workshops, Branding, Business Meetings,	Cultural Programs and other business promotion related activities.	We are associated with leading organizations, Corporates, Chambers of Commerce,Associations and Agencies of Government of India and State Governments such as Korea, Qatar as well as partners of various organizations from around the world.You want a successful event! You want to work with Le Meilleur Global Exhibitions, acompany that lets your brand speak on your behalf. </div>
                   <!-- <a role="button" class="btn-floating btn t btn-sm Ripple-parent waves-effect waves-light" style="padding: 8px; border-radius: 12px;background: linear-gradient(315deg,#3f0d12,#a71d31 74%);">Contact us<div class="Ripple " style="top: 0px; left: 0px; width: 0px; height: 0px;">
                   </div>
                   </a> -->

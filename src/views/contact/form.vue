@@ -14,43 +14,43 @@
     <mdb-card-body>
       <mdb-row>
       <mdb-col col="sm">   
-        <a href="tel:0702220000">
-        <mdb-card style="width:98%;max-width:220px;margin-bottom:3%;padding-top:42px;padding-bottom:42px;margin-top;" >
+        
+        <mdb-card style="width:98%;margin-bottom:3%;padding-top:42px;padding-bottom:42px;margin-top;background-color: #0c0f24;" >
         <mdb-card-body style="margin-left:auto;margin-right:auto;">
-         
+         <a href="tel:0702220000">
           <p>  <mdb-icon icon="phone-alt" /> &nbsp; call</p>
             <p>0702220000</p>
-              <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" >Call</mdb-btn>
+              <!-- <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" >Call</mdb-btn> -->
+                  <mdb-btn style="color:#e9ecef;background: linear-gradient(359deg, #3f0d12, #0c0f24 74%);box-shadow:#f5eaea 0px 5px 5px;" color="" type="submit">Call</mdb-btn>
+                </a> 
         </mdb-card-body>
         </mdb-card>
-        </a> 
+      
     </mdb-col>
       <mdb-col col="sm"> 
-        <a href='https://wa.me/0702220000' target='_blank'>
-        <mdb-card style="width:98%;max-width:220px;margin-bottom:3%;padding-top:42px;padding-bottom:42px;margin-top; " >
+        
+        <mdb-card style="width:98%;margin-bottom:3%;padding-top:42px;padding-bottom:42px;margin-top;background-color: #0c0f24; " >
           <mdb-card-body style="margin-left:auto;margin-right:auto;">
-             
+             <a href='https://wa.me/0702220000' target='_blank'>
               <p>  <mdb-icon fab icon="whatsapp" /> &nbsp;whatsapp number</p>
               <p>0702220000</p>
-               <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" >Call</mdb-btn>
+                     <mdb-btn style="color:#e9ecef;background:linear-gradient(359deg, #3f0d12, #0c0f24 74%);box-shadow:#f5eaea 0px 5px 5px;" color="" type="submit">Call</mdb-btn>
+              
+               <!-- <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" ></mdb-btn> -->
+                </a> 
           </mdb-card-body>
           </mdb-card>
-          </a> 
+         
     </mdb-col>
     </mdb-row>
 
         
-  
-    
-    </mdb-card-body>
-    </mdb-card>
-      
- 
  <a-form :form="form" @submit="handleSubmit"  style="margin-left: auto;margin-right: auto;z-index:0;justify-content: space-around;width:90%;" layout="vertical" >
       <md-card class="md-layout-item md-size-50 md-small-size-100" style="margin-left: auto;
-    margin-right: auto;">
+    margin-right: auto;box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);margin-bottom: 33px;">
+     <mdb-card-body style="margin-left:auto;margin-right:auto;">
         <md-card-header>
-          <div class="md-title text-center">Contact us</div>
+          <div class="md-title text-center" style="font-weight: 600;">Contact us</div>
         </md-card-header>
 
         <md-card-content>
@@ -149,12 +149,15 @@
     </a-form-item> -->
     
             <div class="text-center py-4 mt-3">
-          <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Send Inquery</mdb-btn>
+                     <mdb-btn style="color:#e9ecef;background: linear-gradient(315deg,#3f0d12,#a71d31 74%);box-shadow: rgb(38 3 3) 1px 5px 5px;" color="" type="submit" :disabled="sending">Send Inquery</mdb-btn>
+              
+          <!-- <mdb-btn style="color:#e9ecef;background-color:#0c0f24;" color="" type="submit" :disabled="sending">Send Inquery</mdb-btn> -->
         </div>
           </md-card-content>
      
      
 
+    </mdb-card-body>
 
       </md-card>
 
@@ -162,6 +165,12 @@
       <md-snackbar :md-active.sync="error">{{ emsg }} </md-snackbar>
   </a-form>
 
+  
+    
+    </mdb-card-body>
+    </mdb-card>
+      
+ 
     </mdb-card-body>
   </mdb-card>
 
