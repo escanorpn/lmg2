@@ -12,6 +12,7 @@
   </Layout>
 </template>
 
+
 <script>
 import fom from "./form.vue"
 // import axios from "axios"
