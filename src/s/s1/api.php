@@ -56,13 +56,15 @@ require_once 'cors.php';
     $headers = "From:" . $from;
     $headers2 = "From:" . $to;
     $response['fw']=false ;
-    if(mail($to,$subject,$message,$headers)){
+    // if(mail($to,$subject,$message,$headers)){
             
-        $response['message'] = "Mail Sent. Thank you " . $fname . ", we will contact you shortly.";  
-        $response['fw']=true ;
-    }else{
-      $response['message'] = "Mail not sent Sent please try later";  
-    }
+    //     $response['message'] = "Mail Sent. Thank you " . $fname . ", we will contact you shortly.";  
+    //     $response['fw']=true ;
+    // }else{
+    //   $response['message'] = "Mail not sent Sent please try later"; 
+     
+    // }
+    $response['message'] = $data;  
     
   
 } else{  

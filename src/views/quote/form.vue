@@ -186,13 +186,14 @@ const axios = require('axios');
     data: () => ({
       top: 50,
         collapsed: true,
-       data: {
-          radioStyle:{
+           radioStyle:{
               display: 'flex',
               height: '30px',
               lineHeight: '30px',
               
-          }
+          },
+       data: {
+       
         
         },
       form: {
@@ -291,27 +292,26 @@ const axios = require('axios');
         this.form.email = null
       },
       saveForm () {
-        this.sending = true
+        // alert("sending")
+         console.log("murl: " +murl)
+        // this.sending = true
         var murl=this.$store.state.mUrl;
-        var form_data = new FormData();
+        // var form_data = new FormData();
 
  
-      form_data.append('nm',this.form.eventName);
-      form_data.append('desc',this.form.Location);
-      form_data.append('type',this.form.gender);
-      form_data.append('am',this.form.age);
+      // form_data.append('nm',this.form.eventName);
+      // form_data.append('desc',this.form.Location);
+      // form_data.append('type',this.form.gender);
+      // form_data.append('am',this.form.age);
+      // form_data.append(this.form);
+      console.log("murl: " +murl)
+      console.log("Sending: " +JSON.stringify(this.form))
 
-      console.log("f1: "+form_data.get("file[]"));
-      console.log("form_data: "+JSON.stringify(this.files));
-       for (var pair of form_data.entries()){
-        console.log(pair[0]+', '+pair[1]);
-      }
-      
       axios({
           method: 'POST',
           // url: 'http://localhost/nw/vap/regApi.php?apicall=signup'
-          url: murl+'api.php?apicall=a_up',
-          data: form_data,
+          url: murl+'api.php?apicall=quote',
+          data: this.form,
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
       .then((response) => {
@@ -335,7 +335,8 @@ const axios = require('axios');
       validateForm () {
         this.$v.$touch()
 
-          console.log(JSON.stringify(this.form.phone))
+          console.log("Phone: "+JSON.stringify(this.form.phone))
+          this.saveForm()
         if (!this.$v.$invalid) {
           console.log(JSON.stringify(this.form))
           // this.saveForm()
