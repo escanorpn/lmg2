@@ -132,7 +132,7 @@
           <md-field :class="getValidationClass('aReq')">
           
             
-             <a-textarea :rows="2" placeholder="maxLength is 6" :maxlength="6" v-model="form.aReq" :disabled="sending" />
+             <a-textarea :rows="2" placeholder="Additional requirements" :maxlength="6" v-model="form.aReq" :disabled="sending" />
            
           </md-field>
         </md-card-content>
@@ -151,7 +151,7 @@ background-color:#0c0f24;" color="" type="submit" :disabled="sending">Send Inque
 
       </md-card>
 
-      <md-snackbar :md-active.sync="userSaved">The Product {{ lastUser }} was saved with success!</md-snackbar>
+      <md-snackbar :md-active.sync="userSaved">The Form was submitted successfully!</md-snackbar>
      
     </form>
     
@@ -294,7 +294,7 @@ const axios = require('axios');
       saveForm () {
         // alert("sending")
          console.log("murl: " +murl)
-        // this.sending = true
+        this.sending = true
         var murl=this.$store.state.mUrl;
         // var form_data = new FormData();
 
@@ -304,8 +304,8 @@ const axios = require('axios');
       // form_data.append('type',this.form.gender);
       // form_data.append('am',this.form.age);
       // form_data.append(this.form);
-      console.log("murl: " +murl)
-      console.log("Sending: " +JSON.stringify(this.form))
+      // console.log("murl: " +murl)
+      // console.log("Sending: " +JSON.stringify(this.form))
 
       axios({
           method: 'POST',
@@ -315,8 +315,8 @@ const axios = require('axios');
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
       .then((response) => {
-        console.log("response: "+response);
-        console.log("response1: "+ JSON.stringify(response.data));
+        // console.log("response: "+response);
+        // console.log("response1: "+ JSON.stringify(response.data));
        
 
       })
@@ -329,17 +329,17 @@ const axios = require('axios');
           this.lastUser = `${this.form.eventName} ${this.form.Location}`
           this.userSaved = true
           this.sending = false
-          // this.clearForm()
+          this.clearForm()
         }, 1500)
       },
       validateForm () {
         this.$v.$touch()
 
-          console.log("Phone: "+JSON.stringify(this.form.phone))
-          this.saveForm()
+          // console.log("Phone: "+JSON.stringify(this.form.phone))
+          // this.saveForm()
         if (!this.$v.$invalid) {
           console.log(JSON.stringify(this.form))
-          // this.saveForm()
+          this.saveForm()
         }
       }
     }
