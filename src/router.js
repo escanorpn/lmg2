@@ -15,6 +15,7 @@ import About from './views/about/about.vue'
 import Motocycles1 from './views/admin/motocycles.vue'
 import Gallery from './views/Gallery/g.vue'
 import Portfolio from './views/portfolio/folio.vue'
+import Quote from './views/quote/index.vue'
 
 
 Vue.use(Router)
@@ -102,6 +103,12 @@ export default new Router({
       path:  '/folio',
       name: 'Portfolio',
       component: Portfolio,
+      props: true
+    },
+    {
+      path:  '/quote',
+      name: 'Quote',
+      component: Quote,
       props: true
     }
     // {
