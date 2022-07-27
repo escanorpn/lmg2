@@ -58,7 +58,7 @@ require_once 'cors.php';
     $response['fw']=false ;
     if(mail($to,$subject,$message,$headers)){
             
-        $response['message'] = "Mail Sent. Thank you " . $fname . ", we will contact you shortly.";  
+        $response['message'] = "Mail Sent. Thank you " . $fullName . ", we will contact you shortly.";  
         $response['fw']=true ;
     }else{
       $response['message'] = "Mail not sent Sent please try later"; 
