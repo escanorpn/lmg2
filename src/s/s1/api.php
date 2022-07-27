@@ -9,6 +9,69 @@ require_once 'cors.php';
 
     // if(isset($_GET['Regd_ID'])){  
     // switch($_GET['Regd_ID']){ 
+      
+  case 'quote';
+  {
+    
+  if($data){  
+    
+    $eventName=$data['eventName'];
+    $Location=$data['Location'];
+    $mDate=$data['mDate'];
+    $stSize=$data['stSize'];
+    $options=$data['options'];
+    $fullName=$data['fullName'];
+    $phone=$data['phone'];
+    $email=$data['email'];
+    $aReq=$data['aReq'];
+
+    // $ename = $data['ename'];
+    // $lc = $data['lc'];
+    // $ss = $data['ss'];  
+    // $s = $data['s']; 
+    // if($s==2){
+    //   $urli = $data['urli'];
+    // }else{
+    //   $urli="none";
+    // }
+    // $fname = $data['fname'];
+    // $pn = $data['pn'];
+    // $dt = $data['dt'];
+    // $email = $data['email'];
+    // $ar="none";
+    // if($data['ar']){
+    //   $ar = $data['ar']; 
+    // }
+    
+
+
+
+    // $to = "info@lmgexhibitions.com"; 
+    $to = "vector.pn@gmail.com"; 
+    $from = $email; // this is the sender's Email address
+    $subject = "Form submission";
+    $message =" Quote request by:" . $fullName. "\n\n"." Exhibition name: ". $eventName."\n\n"." Exhibition location: ". $Location."\n\n"." Exhibition Date: ". $mDate."\n\n"." Stand size: ". $stSize."\n\n"." Phone number: ". $phone."\n\n"." Email: ". $email."\n\n"." Additional info: ". $aReq;
+    // $message2 = "Here is a copy of your message " . $name . "\n\n" . $msg;
+
+    $headers = "From:" . $from;
+    $headers2 = "From:" . $to;
+    $response['fw']=false ;
+    if(mail($to,$subject,$message,$headers)){
+            
+        $response['message'] = "Mail Sent. Thank you " . $fname . ", we will contact you shortly.";  
+        $response['fw']=true ;
+    }else{
+      $response['message'] = "Mail not sent Sent please try later";  
+    }
+    
+  
+} else{  
+    $response['error'] = true;   
+    $response['message'] = 'bad data';  
+	// $response['user'] = $user; 
+ }  
+  }
+break;
       case 'mail':  
         if($data){ 
           // if(1==1){
