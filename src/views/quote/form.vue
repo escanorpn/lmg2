@@ -314,7 +314,7 @@ const axios = require('axios');
           data: this.form,
           config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
-      .then((response) => {
+      .then(() => {
         // console.log("response: "+response);
         // console.log("response1: "+ JSON.stringify(response.data));
        
