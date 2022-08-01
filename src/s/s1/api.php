@@ -911,7 +911,7 @@ break;
             // $data=array();
             // $email = $data['email'];
             // $pasword = $data['pass'];
-            $qa="SELECT * FROM portfolio ";
+            $qa="SELECT * FROM portfolio order by pid DESC";
             $qa1=mysqli_query($conn,$qa);
             // $mData=array();
             // $mDataI=array();
